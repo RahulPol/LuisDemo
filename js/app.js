@@ -23,12 +23,12 @@ $(function () {
 
     $('#chatArea').keypress(function (e) {
         if (e.keyCode == 13) {
-            var message = '<div style="border:1px solid black;margin-top:2px;">' + $(this).val() + '</div>';
+            var request = '<div style="margin-top:2px;float:right;width:80%;text-align:right;margin-right:10px;">' + $(this).val() + '</div>';
+            $(this).val();
+            var response = '<div style="margin-top:2px;float:left;width:80%;text-align:left;margin-left:10px;"> You tell me</div>';
 
-            $(this).val('');
-            $(this).focus();
-
-            $('.chatbox-response').append(message)
+            $('.chatbox-response').append(request);
+            $('.chatbox-response').append(response)
         }
     })
 })
