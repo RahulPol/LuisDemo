@@ -23,9 +23,25 @@ $(function () {
 
     $('#chatArea').keypress(function (e) {
         if (e.keyCode == 13) {
-            var request = '<div style="margin-top:2px;float:right;width:80%;text-align:right;margin-right:10px;">' + $(this).val() + '</div>';
-            $(this).val();
-            var response = '<div style="margin-top:2px;float:left;width:80%;text-align:left;margin-left:10px;"> You tell me</div>';
+            var request = '<div class="Request" style=""> <span>' + $(this).val() + '</div>';
+            var api = "https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/03cfd60b-dde9-426f-b437-11c2278dd72c?subscription-key=ab3581dac63c46ac9b755d803f477fbd&verbose=true&timezoneOffset=330&spellCheck=true&q=";
+            $(this).val('');
+
+            $.ajax({
+                url: api + $(this).val(),
+                method: 'GET',
+                beforeSend: function () {
+
+                }
+            }).done(function (response) {
+                console.log('Response..', response);
+            })
+
+
+
+            var response = '<div class="Response"><span> You tell me </span></div>';
+
+
 
             $('.chatbox-response').append(request);
             $('.chatbox-response').append(response)
