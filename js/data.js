@@ -1,5 +1,4 @@
-var data = [
-    {
+var data = [{
         "TreeLevelName": "TD Balance",
         "DataType": "TD Balance",
         "Party": null,
@@ -3072,16 +3071,335 @@ var distinctDataType = [];
 
 for (i = 0; i < data.length; i++) {
     var d = data[i];
-    if (d.DataType == 'Goldman Sachs Margin Summary' || d.DataType == 'Liquidity without Subscription Line Available'
-        || d.DataType == 'Liqudity with Subscription Line Available' || d.DataType == 'Margin' || d.Party == '' || d.Party == null) {
+    if (d.DataType == 'Goldman Sachs Margin Summary' || d.DataType == 'Liquidity without Subscription Line Available' ||
+        d.DataType == 'Liqudity with Subscription Line Available' || d.DataType == 'Margin' || d.Party == '' || d.Party == null) {
         delete data[i];
     }
     d['FxRate'] = ((Math.random()) + 1).toFixed(2);
-
+    if (distinctDataType.indexOf(d.DataType) == -1) {
+        distinctDataType.push(d.DataType);
+    }
 }
+
 
 window.ReportData = [];
 
 data.forEach(function (d) {
     window.ReportData.push([d.DataType, d.Party, d.FxRate, d.VIP, d["Fund 6-A"], d["[VIP (Offshore)]"], d["VCP"], d["Skyway Master"]]);
 })
+
+window.columns = [{
+        title: 'DataType'
+    },
+    {
+        title: 'Party'
+    },
+    {
+        title: 'FxRate'
+    },
+    {
+        title: 'VIP'
+    },
+    {
+        title: 'Fund 6-A'
+    },
+    {
+        title: '[VIP (Offshore)]'
+    },
+    {
+        title: 'VCP'
+    },
+    {
+        title: 'Skyway Master'
+    }
+];
+
+
+
+
+
+ var testdata = {
+     "nodes": [{
+             "name": "Fund Liquidity Details",
+             //"fullName": "Fund Liquidity Details",
+             "id": "fld",
+             "_color": ''
+         }, {
+             "name": "Fund Liquidity Overview",
+             //"fullName": "Fund Liquidity Overview",
+             "id": "flo",
+             "_color": ''
+         }, {
+             "name": "Fund Liquidity Summary",
+             // "fullName": "Fund Liquidity Summary",
+             "id": "fls",
+             "_color": ''
+         }, {
+             "name": "GS Balance",
+             //"fullName": "GS Balance",
+             "id": "gsbalance",
+             "_color": ''
+         }, {
+             "name": "BNY Balance",
+             // "fullName": "BNY Balance",
+             "id": "bnybalance",
+             "_color": ''
+         }, {
+             "name": "Other Bank Balance",
+             //  "fullName": "Other Bank Balance",
+             "id": "otherbalance",
+             "_color": ''
+         }, {
+             "name": "Activity",
+             //"fullName": "Activity",
+             "id": "activity",
+             "_color": ''
+         }, {
+             "name": "GS Fx Rates",
+             // "fullName": "GS Fx Rates",
+             "id": "fx",
+             "_color": ''
+         }, {
+             "name": "Margin",
+             // "fullName": "Margin",
+             "id": "margin",
+             "_color": ''
+         }, {
+             "name": "GS Balance SRMR",
+             "fullName": "SRMR_2300_1200484732_Client_Summary_F_301950_653619.xls",
+             "id": "gsbalsrmr",
+             "_color": ''
+
+         }, {
+             "name": "GS Balance Funding Excess",
+             "fullName": "Portfolio_Margin_RegT301503_0.xls",
+             "id": "gsbalfe",
+             "_color": ''
+         }, {
+             "name": "GS Balance 2300",
+             "fullName": "CustodyPositionWithHeader_DATA_2300_ALL.dat",
+             "id": "gsbal2300",
+             "_color": ''
+         }, {
+             "name": "GS Transaction 2300",
+             "fullName": "CustodyTransactionWithHeader_DATA_2300_ALL.dat",
+             "id": "gsact",
+             "_color": ''
+         }, {
+             "name": "BNY Balance-Cash Inquiry",
+             "fullName": "Cash_Inquiry_Summary_with_Details_20160203_21262932.csv",
+             "id": "bnybal",
+             "_color": ''
+         }, {
+             "name": "IT2 Extract",
+             "fullName": "IT2 Extract",
+             "id": "it2",
+             "_color": ''
+         }, {
+             "name": "Margin Detail",
+             "fullName": "SRMR_2300_1200484732_Margin_Risk_Deta_301989_655236",
+             "id": "margindb",
+             "_color": ''
+         },
+         {
+             "name": "Margin Summary",
+             "fullName": "SRMR_2300_1200484732_Margin_Risk_Summ_301990_658899 ",
+             "id": "margindb",
+             "_color": ''
+         }, {
+             "name": "GS",
+             //"fullName": "GS",
+             "id": "gs",
+             "_color": ''
+         }, {
+             "name": "BNY",
+             //"fullName": "BNY",
+             "id": "bny",
+             "_color": ''
+         }, {
+             "name": "Other Banks",
+             //"fullName": "Other Banks",
+             "id": "other",
+             "_color": ''
+         }
+     ],
+     "links": [{
+             "source": 0,
+             "value": 0.0399974233333,
+             "target": 3,
+             "color": "#44A9A8"
+         }, {
+             "source": 0,
+             "value": 0.0399974233333,
+             "target": 4,
+             "color": "#44A9A8"
+         }, {
+             "source": 0,
+             "value": 0.0399974233333,
+             "target": 5,
+             "color": "#44A9A8"
+         }, {
+             "source": 0,
+             "value": 0.0399974233333,
+             "target": 6,
+             "color": "#44A9A8"
+         }, {
+             "source": 0,
+             "value": 0.0399974233333,
+             "target": 7,
+             "color": "#44A9A8"
+         }, {
+             "source": 0,
+             "value": 0.0399974233333,
+             "target": 8,
+             "color": "#44A9A8"
+         }, {
+             "source": 1,
+             "value": 0.0399974233333,
+             "target": 3,
+             "color": "#44A9A8"
+         }, {
+             "source": 1,
+             "value": 0.0399974233333,
+             "target": 4,
+             "color": "#44A9A8"
+         }, {
+             "source": 1,
+             "value": 0.0399974233333,
+             "target": 5,
+             "color": "#44A9A8"
+         }, {
+             "source": 1,
+             "value": 0.0399974233333,
+             "target": 7,
+             "color": "#44A9A8"
+         }, {
+             "source": 2,
+             "value": 0.0399974233333,
+             "target": 3,
+             "color": "#44A9A8"
+         }, {
+             "source": 2,
+             "value": 0.0399974233333,
+             "target": 4,
+             "color": "#44A9A8"
+         }, {
+             "source": 2,
+             "value": 0.0399974233333,
+             "target": 5,
+             "color": "#44A9A8"
+         }, {
+             "source": 2,
+             "value": 0.0399974233333,
+             "target": 7,
+             "color": "#44A9A8"
+         },
+         // {
+         //     "source": 2,
+         //     "value": 0.0399974233333,
+         //     "target": 8,
+         //     "color": "#44A9A8"
+         // }, 
+         {
+             "source": 3,
+             "value": 0.0399974233333,
+             "target": 9,
+             "color": "#44A9A8"
+         }, {
+             "source": 3,
+             "value": 0.0399974233333,
+             "target": 10,
+             "color": "#44A9A8"
+         }, {
+             "source": 3,
+             "value": 0.0399974233333,
+             "target": 11,
+             "color": "#44A9A8"
+         }, {
+             "source": 4,
+             "value": 0.0399974233333,
+             "target": 13,
+             "color": "#44A9A8"
+         }, {
+             "source": 5,
+             "value": 0.0399974233333,
+             "target": 14,
+             "color": "#44A9A8"
+         }, {
+             "source": 6,
+             "value": 0.0399974233333,
+             "target": 14,
+             "color": "#44A9A8"
+         }, {
+             "source": 7,
+             "value": 0.0399974233333,
+             "target": 11,
+             "color": "#44A9A8"
+         }, {
+             "source": 7,
+             "value": 0.0399974233333,
+             "target": 12,
+             "color": "#44A9A8"
+         }, {
+             "source": 8,
+             "value": 0.0399974233333,
+             "target": 15,
+             "color": "#44A9A8"
+         }, {
+             "source": 8,
+             "value": 0.0399974233333,
+             "target": 16,
+             "color": "#44A9A8"
+         }, {
+             "source": 9,
+             "value": 0.0399974233333,
+             "target": 17,
+             "color": "#44A9A8"
+         }, {
+             "source": 10,
+             "value": 0.0399974233333,
+             "target": 17,
+             "color": "#44A9A8"
+         }, {
+             "source": 11,
+             "value": 0.0399974233333,
+             "target": 17,
+             "color": "#44A9A8"
+         }, {
+             "source": 12,
+             "value": 0.0399974233333,
+             "target": 17,
+             "color": "#44A9A8"
+         }, {
+             "source": 14,
+             "value": 0.0399974233333,
+             "target": 17,
+             "color": "#44A9A8"
+         }, {
+             "source": 15,
+             "value": 0.0399974233333,
+             "target": 17,
+             "color": "#44A9A8"
+         }, {
+             "source": 16,
+             "value": 0.0399974233333,
+             "target": 17,
+             "color": "#44A9A8"
+         }, {
+             "source": 13,
+             "value": 0.0399974233333,
+             "target": 18,
+             "color": "#44A9A8"
+         }, {
+             "source": 14,
+             "value": 0.0399974233333,
+             "target": 18,
+             "color": "#44A9A8"
+         }, {
+             "source": 14,
+             "value": 0.0399974233333,
+             "target": 19,
+             "color": "#44A9A8"
+         }
+     ]
+ }
