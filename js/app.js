@@ -39,8 +39,8 @@ $(function () {
         if (entities[0].type == 'ReportParam') { //got the report param
             if (entities[0].entity == 'fx rate') {
                 chartData = window.FxRateMapping;
-            } else {
-
+            } else if(entities[0].entity == 'quantity') {
+                chartData = window.QuantityMapping;
             }
             $('.chatbox-response').append(result);
             elem = '#' + elem;
