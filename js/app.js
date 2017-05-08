@@ -3,8 +3,10 @@ $(function () {
     window.count = 1;
     console.log('distinctTreeLevelName...', window.ReportData);
 
-    $('#chatIcon').on('click',function(){
-        $('.Chatbox').toggle('slide', { direction: 'right' }, 500 );
+    $('#chatIcon').on('click', function () {
+        $('.Chatbox').toggle('slide', {
+            direction: 'right'
+        }, 500);
     });
 
 
@@ -48,42 +50,42 @@ $(function () {
         }
     }
 
-    var parseFilter = function (en) {
-        var response = {
-            "query": "filter report for MGNL Balance Type",
-            "topScoringIntent": {
-                "intent": "ModifyReport",
-                "score": 1.0
-            },
-            "intents": [{
-                    "intent": "ModifyReport",
-                    "score": 1.0
-                },
-                {
-                    "intent": "None",
-                    "score": 0.009853389
-                },
-                {
-                    "intent": "GetDataLineage",
-                    "score": 0.004855418
-                }
-            ],
-            "entities": [{
-                    "entity": "mgnl",
-                    "type": "ModificatoinValue",
-                    "startIndex": 18,
-                    "endIndex": 21,
-                    "score": 0.9430733
-                },
-                {
-                    "entity": "balance type",
-                    "type": "ReportParam",
-                    "startIndex": 23,
-                    "endIndex": 34,
-                    "score": 0.999162
-                }
-            ]
-        };
+    var parseFilter = function (entities) {
+        var pred = '',
+            value;
+
+        entities.forEach(function (d) {
+            if (d.type == 'ReportParam') {                
+                pred = d.entity == 'price' ?  'Price': d.entity;
+                
+            }
+
+            if (d.type == 'builtin.datetime.date' && d.resolution.hasOwnProperty('date')) {
+                value = d.resolution.date;
+            } else if (d.type == 'builtin.number' && d.resolution.hasOwnProperty('value')) {
+                value = d.resolution.value;
+            }
+
+        })
+
+        $('#cashBalanceReport').dataTable().fnClearTable();
+
+        console.log(entities, pred, value)
+        var myData2 = [];
+
+        window.SourceData.forEach(function (d) {            
+            if (d["Curr " + pred] > value) {                
+                myData2.push([d.CurrAsOfDate, d['Security Description'], d['Balance Type'],
+                    d['Curr Quantity'], d['Curr Price'], d['FxRate'], d['Curr MV'], d['Curr House Req.']
+                ]);
+            }
+        })
+        console.log(entities, pred, value, myData2);
+        $('#cashBalanceReport').dataTable().fnAddData(myData2);
+
+
+
+
     }
 
 
@@ -96,44 +98,30 @@ $(function () {
             $.ajax({
                 url: api + $(this).val(),
                 method: 'GET',
-                beforeSend: function () {
-                }
+                beforeSend: function () {}
             }).done(function (response) {
-                
+
                 $(this).val('');
-                console.log('response',response);
+                console.log('response', response);
                 switch (response.intents[0].intent) {
                     case 'GetDataLineage':
                         parseLineage(response.entities);
                         break;
 
                     case 'ModifyReport':
+                        parseFilter(response.entities);
                         break;
 
                     case 'Greetings':
                         $('.chatbox-response').append('<div class="Response" style=""> Hey</div>');
-                    break;
+                        break;
                     case 'None':
                         break;
                 }
 
             })
-            
+
             $(this).val('');
-
-            // var response = {
-            //     entities: [{
-            //         "entity": "fx rate",
-            //         "type": "ReportParam",
-            //         "startIndex": 20,
-            //         "endIndex": 26,
-            //         "score": 0.967157543
-            //     }]
-            // }
-
-
-            //parseLineage(response.entities);
-
         }
     })
 })

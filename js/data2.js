@@ -1,4 +1,4 @@
-var data = [{
+window.SourceData = [{
         "CurrAsOfDate": "04/04/2017",
         "PrevAsOfDate": "04/03/2017",
         "Security Description": "OMX 5.54% 29Jan20",
@@ -3986,10 +3986,10 @@ var data = [{
 
 window.ReportData = [];
 
-for (i = 0; i < data.length; i++) {
-    var d = data[i];
+for (i = 0; i < window.SourceData.length; i++) {
+    var d = window.SourceData[i];
     if(d.CurrAsOfDate == null){
-        delete data[i];
+        delete window.SourceData[i];
         continue;
     }
 
