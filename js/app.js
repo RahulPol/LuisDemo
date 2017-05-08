@@ -92,13 +92,14 @@ $(function () {
             var request = '<div class="Request" style=""> <span>' + $(this).val() + '</div>';
             var api = "https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/1e6344a7-1a3c-45b5-975b-20ed1b156638?subscription-key=bad5fac60ddd4cd89170ba2cadb66e59&verbose=true&timezoneOffset=0&q=";
 
+            $('.chatbox-response').append(request);
             $.ajax({
                 url: api + $(this).val(),
                 method: 'GET',
                 beforeSend: function () {
                 }
             }).done(function (response) {
-                $('.chatbox-response').append(request);
+                
                 $(this).val('');
                 console.log('response',response);
                 switch (response.intents[0].intent) {
@@ -109,12 +110,15 @@ $(function () {
                     case 'ModifyReport':
                         break;
 
+                    case 'Greetings':
+                        $('.chatbox-response').append('<div class="Response" style=""> Hey</div>');
+                    break;
                     case 'None':
                         break;
                 }
 
             })
-            $('.chatbox-response').append(request);
+            
             $(this).val('');
 
             // var response = {
