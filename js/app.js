@@ -26,7 +26,7 @@ $(function () {
             chartData;
         window.count++;
 
-        result = '<div class="Response"><div class="dependency" style="height:20%;width:100%"  >\
+        result = '<div class="Response"><div  style="height:20%;width:100%"  >\
                                 <div class="sankey box box-default">\
                                     <div class="box-body">\
                                         <div id=' + elem + '>\
@@ -39,7 +39,7 @@ $(function () {
         if (entities[0].type == 'ReportParam') { //got the report param
             if (entities[0].entity == 'fx rate') {
                 chartData = window.FxRateMapping;
-            } else if(entities[0].entity == 'quantity') {
+            } else if (entities[0].entity == 'quantity') {
                 chartData = window.QuantityMapping;
             }
             $('.chatbox-response').append(result);
@@ -55,9 +55,9 @@ $(function () {
             value;
 
         entities.forEach(function (d) {
-            if (d.type == 'ReportParam') {                
-                pred = d.entity == 'price' ?  'Price': d.entity;
-                
+            if (d.type == 'ReportParam') {
+                pred = d.entity == 'price' ? 'Price' : d.entity;
+
             }
 
             if (d.type == 'builtin.datetime.date' && d.resolution.hasOwnProperty('date')) {
@@ -73,10 +73,10 @@ $(function () {
         console.log(entities, pred, value)
         var myData2 = [];
 
-        window.SourceData.forEach(function (d) {            
-            if (d["Curr " + pred] > value) {                
+        window.SourceData.forEach(function (d) {
+            if (d["Curr " + pred] > value) {
                 myData2.push([d.CurrAsOfDate, d['Security Description'], d['Balance Type'],
-                    d['Curr Quantity'], d['Curr Price'], d['FxRate'], d['Curr MV'], d['Curr House Req.']
+                d['Curr Quantity'], d['Curr Price'], d['FxRate'], d['Curr MV'], d['Curr House Req.']
                 ]);
             }
         })
@@ -94,32 +94,34 @@ $(function () {
             var request = '<div class="Request" style=""> <span>' + $(this).val() + '</div>';
             var api = "https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/1e6344a7-1a3c-45b5-975b-20ed1b156638?subscription-key=bad5fac60ddd4cd89170ba2cadb66e59&verbose=true&timezoneOffset=0&q=";
 
-            $('.chatbox-response').append(request);
-            $.ajax({
-                url: api + $(this).val(),
-                method: 'GET',
-                beforeSend: function () {}
-            }).done(function (response) {
+            // $('.chatbox-response').append(request);
+            // $.ajax({
+            //     url: api + $(this).val(),
+            //     method: 'GET',
+            //     beforeSend: function () { }
+            // }).done(function (response) {
 
-                $(this).val('');
-                console.log('response', response);
-                switch (response.intents[0].intent) {
-                    case 'GetDataLineage':
-                        parseLineage(response.entities);
-                        break;
+            //     $(this).val('');
+            //     console.log('response', response);
+            //     switch (response.intents[0].intent) {
+            //         case 'GetDataLineage':
+            //             parseLineage(response.entities);
+            //             break;
 
-                    case 'ModifyReport':
-                        parseFilter(response.entities);
-                        break;
+            //         case 'ModifyReport':
+            //             parseFilter(response.entities);
+            //             break;
 
-                    case 'Greetings':
-                        $('.chatbox-response').append('<div class="Response" style=""> Hey</div>');
-                        break;
-                    case 'None':
-                        break;
-                }
+            //         case 'Greetings':
+            //             $('.chatbox-response').append('<div class="Response" style=""> Hey</div>');
+            //             break;
+            //         case 'None':
+            //             break;
+            //     }
 
-            })
+            // })
+
+            parseLineage('<div class="Response" style=""> Hey</div>');
 
             $(this).val('');
         }
