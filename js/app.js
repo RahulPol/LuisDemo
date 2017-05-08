@@ -26,7 +26,7 @@ $(function () {
             chartData;
         window.count++;
 
-        result = '<div class="Response"><div  style="height:20%;width:100%"  >\
+        result = '<div class="Response"><div class="dependency" style="height:20%;width:100%"  >\
                                 <div class="sankey box box-default">\
                                     <div class="box-body">\
                                         <div id=' + elem + '>\
@@ -94,7 +94,7 @@ $(function () {
             var request = '<div class="Request" style=""> <span>' + $(this).val() + '</div>';
             var api = "https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/1e6344a7-1a3c-45b5-975b-20ed1b156638?subscription-key=bad5fac60ddd4cd89170ba2cadb66e59&verbose=true&timezoneOffset=0&q=";
 
-            // $('.chatbox-response').append(request);
+            $('.chatbox-response').append(request);
             // $.ajax({
             //     url: api + $(this).val(),
             //     method: 'GET',
@@ -121,7 +121,7 @@ $(function () {
 
             // })
 
-            parseLineage('<div class="Response" style=""> Hey</div>');
+            $('.chatbox-response').append('<div class="Response" style=""> Reponse </div>');
 
             $(this).val('');
         }
